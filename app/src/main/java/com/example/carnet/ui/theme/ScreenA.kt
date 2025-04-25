@@ -11,7 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 val poppins = FontFamily.Default
-
 @Composable
 fun ScreenA(
     nombre: MutableState<String>,
@@ -37,20 +36,13 @@ fun ScreenA(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            "Registro de Mascota",
-            color = White,
-            fontSize = 28.sp,
-            fontFamily = poppins,
-            textAlign = TextAlign.Center
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
+        Text("Registro de Mascota", color = White, fontSize = 26.sp, textAlign = TextAlign.Center)
+        Spacer(modifier = Modifier.height(24.dp))
 
         val fieldModifier = Modifier
             .fillMaxWidth()
-            .background(LightBlue, RoundedCornerShape(12.dp))
-            .padding(horizontal = 8.dp)
+            .background(White.copy(alpha = 0.1f), RoundedCornerShape(12.dp))
+            .padding(4.dp)
 
         OutlinedTextField(
             value = nombre.value,
@@ -59,10 +51,10 @@ fun ScreenA(
             leadingIcon = { Icon(Icons.Default.AccountCircle, contentDescription = null) },
             modifier = fieldModifier,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = LightBlue,
-                textColor = White,
-                focusedBorderColor = White,
-                unfocusedBorderColor = White
+                backgroundColor = White,
+                textColor = Black,
+                focusedBorderColor = LightGray,
+                unfocusedBorderColor = LightGray
             )
         )
 
@@ -75,10 +67,10 @@ fun ScreenA(
             leadingIcon = { Icon(Icons.Default.Info, contentDescription = null) },
             modifier = fieldModifier,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = LightBlue,
-                textColor = White,
-                focusedBorderColor = White,
-                unfocusedBorderColor = White
+               backgroundColor = White,
+                textColor = Black,
+                focusedBorderColor = LightGray,
+                unfocusedBorderColor = LightGray
             )
         )
 
@@ -88,13 +80,13 @@ fun ScreenA(
             value = tamanio.value,
             onValueChange = { tamanio.value = it },
             label = { Text("Tamaño") },
-            leadingIcon = { Icon(Icons.Default.Info, contentDescription = null) },
+            leadingIcon = { Icon(Icons.Default.Settings, contentDescription = null) },
             modifier = fieldModifier,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = LightBlue,
-                textColor = White,
-                focusedBorderColor = White,
-                unfocusedBorderColor = White
+                backgroundColor = White,
+                textColor = Black,
+                focusedBorderColor = LightGray,
+                unfocusedBorderColor = LightGray
             )
         )
 
@@ -108,10 +100,10 @@ fun ScreenA(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = fieldModifier,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = LightBlue,
-                textColor = White,
-                focusedBorderColor = White,
-                unfocusedBorderColor = White
+                backgroundColor =  White,
+                textColor = Black,
+                focusedBorderColor = LightGray,
+                unfocusedBorderColor = LightGray
             )
         )
 
@@ -124,10 +116,10 @@ fun ScreenA(
             leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
             modifier = fieldModifier,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = LightBlue,
-                textColor = White,
-                focusedBorderColor = White,
-                unfocusedBorderColor = White
+                backgroundColor = White,
+                textColor = Black,
+                focusedBorderColor = LightGray,
+                unfocusedBorderColor = LightGray
             )
         )
 
@@ -135,9 +127,11 @@ fun ScreenA(
 
         Button(
             onClick = { navController.navigate("screen_b") },
-            colors = ButtonDefaults.buttonColors(backgroundColor= Color.White)
+            colors = ButtonDefaults.buttonColors(backgroundColor =  LightBlue)
         ) {
-            Text("Registrar", color = DarkBlue, fontSize = 18.sp)
+            Icon(Icons.Default.Check, contentDescription = null)
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Registrar")
         }
     }
 }
