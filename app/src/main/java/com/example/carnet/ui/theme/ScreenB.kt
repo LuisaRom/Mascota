@@ -1,54 +1,72 @@
 package com.example.carnet.ui.theme
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.carnet.RegistroDatos
+
+
+val poppinsB = FontFamily.Default
+
 @Composable
-fun ScreenB(datos: RegistroDatos) {
-    Surface(color = AzulOscuro, modifier = Modifier.fillMaxSize()) {
-        Card(
-            shape = RoundedCornerShape(20.dp),
-            backgroundColor = GrisClaro,
-            elevation = 12.dp,
+fun ScreenB(
+    nombre: String,
+    raza: String,
+    tamanio: String,
+    edad: String,
+    fotoUrl: String,
+    navController: NavController
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(DarkBlue)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Box(
             modifier = Modifier
-                .padding(20.dp)
                 .fillMaxWidth()
-                .height(IntrinsicSize.Min)
+                .background(White, RoundedCornerShape(12.dp))
+                .padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    painter = rememberAsyncImagePainter(datos.urlImagen),
-                    contentDescription = "Foto del perrito",
+                    painter = rememberAsyncImagePainter(fotoUrl),
+                    contentDescription = "Foto de la mascota",
                     modifier = Modifier
-                        .size(150.dp)
+                        .size(120.dp)
                         .padding(end = 16.dp)
-                        .clip(RoundedCornerShape(12.dp))
                 )
 
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Nombre: ${datos.nombre}", color = Negro, style = MaterialTheme.typography.body1)
-                    Text("Raza: ${datos.raza}", color = Negro, style = MaterialTheme.typography.body1)
-                    Text("Tamaño: ${datos.tamaño}", color = Negro, style = MaterialTheme.typography.body1)
-                    Text("Edad: ${datos.edad}", color = Negro, style = MaterialTheme.typography.body1)
+                Column {
+                    Text("Nombre: $nombre", fontSize = 18.sp, fontFamily = poppinsB, color = Black)
+                    Text("Raza: $raza", fontSize = 18.sp, fontFamily = poppinsB, color = Black)
+                    Text("Tamaño: $tamanio", fontSize = 18.sp, fontFamily = poppinsB, color = Black)
+                    Text("Edad: $edad años", fontSize = 18.sp, fontFamily = poppinsB, color = Black)
                 }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(
+                onClick = { navController.navigate("screen_a") },
+                colors = ButtonDefaults.buttonColors(backgroundColor = White)
+            ) {
+                Text("Registrar Nueva Mascota", color = DarkBlue)
             }
         }
     }
